@@ -1,13 +1,13 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useState } from "react";
 
 export function CounterProvider({ children }) {
-  const [state, dispatch] = useReducer(counterReducer, initialValue);
+  const [state, setState] = useState(initialValue);
 
   function increment() {
-    dispatch("increment");
+    setState({ ...state, count: state.count + 1 });
   }
   function decrement() {
-    dispatch("decrement");
+    setState({ ...state, count: state.count - 1 });
   }
 
   return (
@@ -24,17 +24,6 @@ export function CounterProvider({ children }) {
 }
 
 export const useCounter = () => useContext(CounterContext);
-
-function counterReducer(state, action) {
-  switch (action) {
-    case "increment":
-      return { ...state, count: state.count + 1 };
-    case "decrement":
-      return { ...state, count: state.count - 1 };
-    default:
-      throw new Error();
-  }
-}
 
 const initialValue = { count: 0 };
 const CounterContext = createContext(null);
