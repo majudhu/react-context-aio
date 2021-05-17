@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import { CounterProvider } from "../context/counter";
 
 function MyApp({ Component, pageProps }) {
